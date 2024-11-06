@@ -118,6 +118,11 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 				$url       = $matches[2];
 				$link_text = $matches[3];
 
+				// Skip links with fragment identifiers (e.g., #content)
+				if ( preg_match( '/^#/i', $url ) ) {
+					return $matches[0]; // Return the original link without modification
+				}
+
 				if ( in_array( $url, $this->urls_to_remove, true ) || ! $this->is_url_reachable( $url ) ) {
 					file_put_contents( $this->log_file, "Removed URL in Post ID {$post_id}: {$url}\n", FILE_APPEND );
 					return $link_text;

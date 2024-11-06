@@ -25,6 +25,7 @@ This plugin registers a WP-CLI command `remove_unreachable_links` with options f
 
 ```bash
 wp remove_unreachable_links run /path/to/urls-to-remove.txt --log=/path/to/logfile.txt
+```
 
 ## Benefits for SEO and User Experience
 

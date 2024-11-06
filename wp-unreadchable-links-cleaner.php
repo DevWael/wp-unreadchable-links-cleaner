@@ -63,7 +63,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 		 *
 		 * @when after_wp_load
 		 */
-		public function __invoke( $args, $assoc_args ) {
+		public function run( $args, $assoc_args ) {
 			$file_path = $args[0];
 			if ( ! file_exists( $file_path ) || ! is_readable( $file_path ) ) {
 				WP_CLI::error( "File not found or not readable: $file_path" );
@@ -140,5 +140,21 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	}
 
 	// Register the command with WP-CLI.
-	WP_CLI::add_command( 'remove_unreachable_links', 'Remove_Unreachable_Links_Command' );
+	WP_CLI::add_command( 'remove_unreachable_links', 'Remove_Unreachable_Links_Command', [
+		'shortdesc' => 'Scans and removes unreachable links from posts.',
+		'run'  => [
+			[
+				'type'        => 'assoc',
+				'name'        => 'file',
+				'description' => 'Path to the file containing URLs to remove.',
+				'optional'    => false,
+			],
+			[
+				'type'        => 'assoc',
+				'name'        => 'log',
+				'description' => 'Path to the log file.',
+				'optional'    => true,
+			],
+		],
+	] );
 }

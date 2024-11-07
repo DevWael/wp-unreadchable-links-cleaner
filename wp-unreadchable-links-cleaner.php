@@ -123,7 +123,7 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 					return $matches[0]; // Return the original link without modification
 				}
 
-				if ( in_array( $url, $this->urls_to_remove, true ) || ! $this->is_url_reachable( $url ) ) {
+				if ( in_array( $url, $this->urls_to_remove, true ) /*|| ! $this->is_url_reachable( $url )*/ ) {
 					file_put_contents( $this->log_file, "Removed URL in Post ID {$post_id}: {$url} - Link Text: {$link_text}\n", FILE_APPEND );
 					return $link_text; // Return only the link text, removing the URL
 				}
